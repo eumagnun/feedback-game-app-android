@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Feedback Games</string>
+    <string name="id">id</string>
+    <string name="teste">Teste</string>
+    <string name="n64">N64</string>
+    <string name="_8_5">8.5</string>
+    <string name="link_youtube">Link Youtube</string>
+    <string name="salvar">Salvar</string>
+    <string name="nome">Nome</string>
+    <string name="console">Console</string>
+    <string name="nota">Nota</string>
+    <string name="link_de_imagem">Link de imagem</string>
+    <string name="link_de_video">Link de video</string>
+    <string name="http_youtube_com">http://youtube.com</string>
+    <string name="quantidade">Quantidade</string>
+</resources>
