@@ -23,10 +23,8 @@ private val retrofit = Retrofit.Builder()
 
 interface FeedbackApiService {
 
-    @GET("/feedback-games/v1/api/feedbacks")
     suspend fun getFeedbacks(): List<FeedbackGame>
 
-    @POST("/feedback-games/v1/api/feedbacks")
     suspend fun gravarFeedback(@Body feedbackGame:FeedbackGame )
 
 }
