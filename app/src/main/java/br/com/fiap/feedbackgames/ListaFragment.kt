@@ -1,6 +1,7 @@
 package br.com.fiap.feedbackgames
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fiap.feedbackgames.adapter.ItemAdapter
 import br.com.fiap.feedbackgames.databinding.FragmentListaBinding
+import br.com.fiap.feedbackgames.model.FeedbackGame
 import br.com.fiap.feedbackgames.network.FeedbackApi
 import kotlinx.coroutines.*
-import br.com.fiap.feedbackgames.model.FeedbackGame
 
 class ListaFragment : Fragment(){
 
@@ -32,8 +33,10 @@ class ListaFragment : Fragment(){
         recyclerView = binding.rvItems
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        carregarDados()
-
+        binding.fab.setOnClickListener() {
+            val action = ListaFragmentDirections.actionListaFragmentToCadastroFragment()
+            this.findNavController().navigate(action)
+        }
     }
 
     override fun onResume() {
@@ -43,20 +46,14 @@ class ListaFragment : Fragment(){
 
     private fun atualizarTela() {
         recyclerView.adapter = ItemAdapter(listaFeedbacks)
-
         binding.tvQuantidade.text = listaFeedbacks.size.toString()
-
-        binding.fab.setOnClickListener() {
-            val action = ListaFragmentDirections.actionListaFragmentToCadastroFragment()
-            this.findNavController().navigate(action)
-        }
     }
 
     private fun carregarDados(){
         CoroutineScope(Dispatchers.IO).launch() {
             try {
                 val result = FeedbackApi.retrofitService.getFeedbacks()
-                //println("retornoApi: Success: ${result.size} registros recuperados")
+                Log.i("EVENTO_API","retornoApi: Success: ${result.size} registros recuperados")
                 listaFeedbacks = mutableListOf<FeedbackGame>()
                 result.forEach {listaFeedbacks.add((it))}
 
@@ -64,7 +61,7 @@ class ListaFragment : Fragment(){
                     atualizarTela()
                 }
             }catch (e: Exception){
-                //println("retornoApi: " + e.message)
+                Log.i("EVENTO_API","retornoApi:  + ${e.message}")
             }
         }
     }

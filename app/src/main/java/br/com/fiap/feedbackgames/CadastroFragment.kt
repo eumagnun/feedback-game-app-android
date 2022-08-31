@@ -2,6 +2,7 @@ package br.com.fiap.cadastrodepessoas
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,12 +42,12 @@ class CadastroFragment : Fragment() {
         coroutineScope.launch {
             try {
                 val result = FeedbackApi.retrofitService.gravarFeedback(feedback)
-                //println("retornoApi: Successo: ${result}")
+                Log.i("EVENTO_API","retornoApi: Successo: ${result}")
                 withContext(Dispatchers.Main){
                     atualizarTela()
                 }
             }catch (e: Exception){
-                //println("retornoApi: " + e.printStackTrace())
+                Log.i("EVENTO_API","retornoApi: ${e.printStackTrace()}" )
             }
         }
     }

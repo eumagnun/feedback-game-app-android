@@ -1,14 +1,10 @@
 package br.com.fiap.feedbackgames
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import br.com.fiap.feedbackgames.network.FeedbackApi
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,22 +19,19 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         setupActionBarWithNavController(navController)
-
-        loaddata()
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    private fun loaddata() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val result = FeedbackApi.retrofitService.getFeedbacks()
-                //println("retornoApi: Success: ${result.size} registros recuperados")
-            } catch (e: Exception) {
-                //println("retornoApi: " + e.message)
-            }
-        }
-    }
+    //TODO 1 - Incluir dependências
+    //TODO 2 - Explicar dependencias
+    //TODO 3 - Criar arquivo ApiService com conigurações necessárias
+    //TODO 4 - Habilitar consumo de APIs HTTP no AndroidManifest
+    //TODO 5 - Tentar rodar app (vai dar problema de permissão de acesso a internet)
+    //TODO 6 - Incluir permissão de acesso a internet
+    //TODO 7 - Tentar rodar app (Request HTTP Main Thread)
+    //TODO 8 - Ir para slide e falar sobre Coroutines
+    //TODO 9 - Tentar rodar app e consumir api (agora com sucesso)
 }
