@@ -1,6 +1,5 @@
 package br.com.fiap.feedbackgames.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fiap.feedbackgames.R
 import com.squareup.picasso.Picasso
-import model.FeedbackGame
+import br.com.fiap.feedbackgames.model.FeedbackGame
 
 class ItemAdapter(
-    private val context: Context, private val dataset: List<FeedbackGame>
+    private val dataset: List<FeedbackGame>
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
-    //TODO EXTRA-CLICK_LISTENER-3-Classe correspondente a um item da lista, também implementa a interface para monitoramento de clicks em items
-    class ItemViewHolder(private val view: View) :
+    class ItemViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
 
         val tvItemId: TextView = view.findViewById(R.id.tvItemId)
@@ -26,7 +24,6 @@ class ItemAdapter(
         val tvItemUrlVideo: TextView = view.findViewById(R.id.tvItemUrlVideo)
     }
 
-    //TODO EXTRA-CLICK_LISTENER-4-//inicializado ItemViewHolder com onItemClickListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_item, parent, false)
@@ -34,7 +31,6 @@ class ItemAdapter(
         return ItemViewHolder(adapterLayout)
     }
 
-    //função usada pelo layoutManager para aplicar os dados do dataset a cada item da lista
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val gameFeedback = dataset[position]
         holder.tvItemId.text = gameFeedback.id.toString()
@@ -45,9 +41,4 @@ class ItemAdapter(
     }
 
     override fun getItemCount() = dataset.size
-
-
-    interface OnItemClickListener {
-        fun onItemClick(item: Int)
-    }
 }

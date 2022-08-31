@@ -14,54 +14,49 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import model.FeedbackGame
+import br.com.fiap.feedbackgames.model.FeedbackGame
 
 
 class CadastroFragment : Fragment() {
 
-    private var binding: FragmentCadastroBinding? =null
+    private lateinit var binding: FragmentCadastroBinding
 
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View {
         binding = FragmentCadastroBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.btCadastrar?.setOnClickListener(){
+        binding.btCadastrar.setOnClickListener(){
             gravar()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding=null
-    }
-
     private fun gravar(){
 
-        var feedback = montarFeedback()
+        val feedback = montarFeedback()
 
         val coroutineScope = CoroutineScope(Dispatchers.IO)
-        coroutineScope.launch() {
+        coroutineScope.launch {
             try {
                 val result = FeedbackApi.retrofitService.gravarFeedback(feedback)
-                println("retornoApi: Successo: ${result}")
+                //println("retornoApi: Successo: ${result}")
                 withContext(Dispatchers.Main){
-                    updateUI()
+                    atualizarTela()
                 }
             }catch (e: Exception){
-                println("retornoApi: " + e.printStackTrace())
+                //println("retornoApi: " + e.printStackTrace())
             }
         }
     }
 
-    private fun updateUI() {
-        binding?.etNome?.text?.clear()
-        binding?.etNota?.text?.clear()
-        binding?.etConsole?.text?.clear()
-        binding?.etLinkImagem?.text?.clear()
-        binding?.etlinkVideo?.text?.clear()
+    private fun atualizarTela() {
+        binding.etNome.text?.clear()
+        binding.etNota.text?.clear()
+        binding.etConsole.text?.clear()
+        binding.etLinkImagem.text?.clear()
+        binding.etlinkVideo.text?.clear()
 
         esconderTeclado(requireView())
 
@@ -70,17 +65,16 @@ class CadastroFragment : Fragment() {
     }
 
     private fun montarFeedback(): FeedbackGame {
-        val nome:String = binding?.etNome?.text.toString()
-        val nota:String = binding?.etNota?.text.toString()
-        val console:String = binding?.etConsole?.text.toString()
-        val linkImagem:String=binding?.etLinkImagem?.text.toString()
-        val linkVideo:String=binding?.etlinkVideo?.text.toString()
+        val nome:String = binding.etNome.text.toString()
+        val nota:String = binding.etNota.text.toString()
+        val console:String = binding.etConsole.text.toString()
+        val linkImagem:String=binding.etLinkImagem.text.toString()
+        val linkVideo:String=binding.etlinkVideo.text.toString()
 
         val feedbackGame = FeedbackGame(nome = nome, nota = nota, console = console, urlImagem = linkImagem, urlVideo = linkVideo)
 
         return feedbackGame;
     }
-
 
     fun esconderTeclado(view: View) {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

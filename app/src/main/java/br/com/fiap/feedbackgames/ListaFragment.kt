@@ -1,4 +1,4 @@
-package br.com.fiap.cadastrodepessoas
+package br.com.fiap.feedbackgames
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,73 +12,60 @@ import br.com.fiap.feedbackgames.adapter.ItemAdapter
 import br.com.fiap.feedbackgames.databinding.FragmentListaBinding
 import br.com.fiap.feedbackgames.network.FeedbackApi
 import kotlinx.coroutines.*
-import model.FeedbackGame
+import br.com.fiap.feedbackgames.model.FeedbackGame
 
-
-//TODO EXTRA-CLICK_LISTENER-5-//implementar OnItemClickListener
 class ListaFragment : Fragment(){
 
-    private var binding: FragmentListaBinding? =null
-    //TODO OPCIONAL:
-    //  private var _binding: FragmentCadastroBinding? =null
-    //  private val binding get() = _binding!!
-    private var listaFeedbacks = mutableListOf<FeedbackGame>()
+    private lateinit var binding: FragmentListaBinding
+    private lateinit var listaFeedbacks: MutableList<FeedbackGame>
 
     private lateinit var  recyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentListaBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        recyclerView = binding!!.rvItems
+        listaFeedbacks = mutableListOf()
+        recyclerView = binding.rvItems
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        getDados()
+        carregarDados()
 
     }
 
     override fun onResume() {
-        getDados()
+        carregarDados()
         super.onResume()
     }
 
-    private fun updateUI() {
-        recyclerView.adapter = ItemAdapter(requireContext(), listaFeedbacks)
+    private fun atualizarTela() {
+        recyclerView.adapter = ItemAdapter(listaFeedbacks)
 
-        binding?.tvQuantidade?.text = listaFeedbacks.size.toString()
+        binding.tvQuantidade.text = listaFeedbacks.size.toString()
 
-        binding?.fab?.setOnClickListener() {
+        binding.fab.setOnClickListener() {
             val action = ListaFragmentDirections.actionListaFragmentToCadastroFragment()
             this.findNavController().navigate(action)
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding=null
-    }
-
-    private fun getDados(){
-        val coroutineScope = CoroutineScope(Dispatchers.IO)
-        coroutineScope.launch() {
+    private fun carregarDados(){
+        CoroutineScope(Dispatchers.IO).launch() {
             try {
                 val result = FeedbackApi.retrofitService.getFeedbacks()
-                println("retornoApi: Success: ${result.size} registros recuperados")
+                //println("retornoApi: Success: ${result.size} registros recuperados")
                 listaFeedbacks = mutableListOf<FeedbackGame>()
                 result.forEach {listaFeedbacks.add((it))}
 
                 withContext(Dispatchers.Main){
-                    updateUI()
+                    atualizarTela()
                 }
             }catch (e: Exception){
-                println("retornoApi: " + e.message)
+                //println("retornoApi: " + e.message)
             }
         }
     }
-
-
 }

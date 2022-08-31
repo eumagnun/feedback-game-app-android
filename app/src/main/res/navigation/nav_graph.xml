@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listaFragment"
-        android:name="br.com.fiap.cadastrodepessoas.ListaFragment"
+        android:name="br.com.fiap.feedbackgames.ListaFragment"
         android:label="ListaFragment" >
         <action
             android:id="@+id/action_listaFragment_to_cadastroFragment"

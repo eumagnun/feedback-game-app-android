@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val result = FeedbackApi.retrofitService.getFeedbacks()
-                println("retornoApi: Success: ${result.size} registros recuperados")
+                //println("retornoApi: Success: ${result.size} registros recuperados")
             } catch (e: Exception) {
-                println("retornoApi: " + e.message)
+                //println("retornoApi: " + e.message)
             }
         }
     }
