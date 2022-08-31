@@ -2,6 +2,7 @@ package br.com.fiap.cadastrodepessoas
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.com.fiap.feedbackgames.databinding.FragmentCadastroBinding
-import br.com.fiap.feedbackgames.network.FeedbackApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import br.com.fiap.feedbackgames.model.FeedbackGame
 
 
@@ -34,21 +30,7 @@ class CadastroFragment : Fragment() {
     }
 
     private fun gravar(){
-
-        val feedback = montarFeedback()
-
-        val coroutineScope = CoroutineScope(Dispatchers.IO)
-        coroutineScope.launch {
-            try {
-                val result = FeedbackApi.retrofitService.gravarFeedback(feedback)
-                //println("retornoApi: Successo: ${result}")
-                withContext(Dispatchers.Main){
-                    atualizarTela()
-                }
-            }catch (e: Exception){
-                //println("retornoApi: " + e.printStackTrace())
-            }
-        }
+        Log.i("EVENTO_API","Enviando dados para a API ")
     }
 
     private fun atualizarTela() {

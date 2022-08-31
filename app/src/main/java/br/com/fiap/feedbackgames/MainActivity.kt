@@ -1,14 +1,10 @@
 package br.com.fiap.feedbackgames
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import br.com.fiap.feedbackgames.network.FeedbackApi
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,13 +28,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loaddata() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val result = FeedbackApi.retrofitService.getFeedbacks()
-                //println("retornoApi: Success: ${result.size} registros recuperados")
-            } catch (e: Exception) {
-                //println("retornoApi: " + e.message)
-            }
-        }
+        //println("retornoApi: " + e.message)
     }
 }

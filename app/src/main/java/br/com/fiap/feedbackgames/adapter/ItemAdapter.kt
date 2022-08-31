@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fiap.feedbackgames.R
-import com.squareup.picasso.Picasso
 import br.com.fiap.feedbackgames.model.FeedbackGame
 
 class ItemAdapter(
@@ -37,7 +36,7 @@ class ItemAdapter(
         holder.tvItemNome.text = gameFeedback.nome
         holder.tvItemConsole.text = gameFeedback.console
         holder.tvItemUrlVideo.text = gameFeedback.urlVideo
-        Picasso.get().load(gameFeedback.urlImagem).into(holder.ivItemFoto)
+        //Picasso.get().load(gameFeedback.urlImagem).into(holder.ivItemFoto)
     }
 
     override fun getItemCount() = dataset.size
