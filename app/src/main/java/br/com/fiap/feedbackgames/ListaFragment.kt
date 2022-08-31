@@ -13,6 +13,7 @@ import br.com.fiap.feedbackgames.adapter.ItemAdapter
 import br.com.fiap.feedbackgames.databinding.FragmentListaBinding
 import br.com.fiap.feedbackgames.model.FeedbackGame
 import br.com.fiap.feedbackgames.network.FeedbackApi
+import br.com.fiap.feedbackgames.network.RetrofitHelper
 import kotlinx.coroutines.*
 
 class ListaFragment : Fragment(){
@@ -52,9 +53,9 @@ class ListaFragment : Fragment(){
     private fun carregarDados(){
         CoroutineScope(Dispatchers.IO).launch() {
             try {
-                val result = FeedbackApi.retrofitService.getFeedbacks()
+                val result = RetrofitHelper.getInstance().create(FeedbackApi::class.java).getFeedbacks()
                 Log.i("EVENTO_API","retornoApi: Success: ${result.size} registros recuperados")
-                listaFeedbacks = mutableListOf<FeedbackGame>()
+                listaFeedbacks = mutableListOf()
                 result.forEach {listaFeedbacks.add((it))}
 
                 withContext(Dispatchers.Main){

@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import br.com.fiap.feedbackgames.model.FeedbackGame
+import br.com.fiap.feedbackgames.network.RetrofitHelper
 
 
 class CadastroFragment : Fragment() {
@@ -41,7 +42,7 @@ class CadastroFragment : Fragment() {
         val coroutineScope = CoroutineScope(Dispatchers.IO)
         coroutineScope.launch {
             try {
-                val result = FeedbackApi.retrofitService.gravarFeedback(feedback)
+                val result = RetrofitHelper.getInstance().create(FeedbackApi::class.java).gravarFeedback(feedback)
                 Log.i("EVENTO_API","retornoApi: Successo: ${result}")
                 withContext(Dispatchers.Main){
                     atualizarTela()

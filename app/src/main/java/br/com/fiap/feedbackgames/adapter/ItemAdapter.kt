@@ -37,7 +37,10 @@ class ItemAdapter(
         holder.tvItemNome.text = gameFeedback.nome
         holder.tvItemConsole.text = gameFeedback.console
         holder.tvItemUrlVideo.text = gameFeedback.urlVideo
-        Picasso.get().load(gameFeedback.urlImagem).into(holder.ivItemFoto)
+
+        if(!gameFeedback.urlImagem.equals("")) {
+            Picasso.get().load(gameFeedback.urlImagem).into(holder.ivItemFoto)
+        }
     }
 
     override fun getItemCount() = dataset.size
