@@ -10,6 +10,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 private const val BASE_URL =
     "http://ip172-18-0-36-cc7sndld48eg00dtc9v0-8080.direct.labs.play-with-docker.com/"
 
+//singleton
 object RetrofitHelper {
 
     fun getInstance(): Retrofit {

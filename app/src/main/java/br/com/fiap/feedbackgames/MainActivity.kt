@@ -25,13 +25,14 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    //TODO 1 - Incluir dependências
-    //TODO 2 - Explicar dependencias
-    //TODO 3 - Criar arquivo ApiService com conigurações necessárias
-    //TODO 4 - Habilitar consumo de APIs HTTP no AndroidManifest
-    //TODO 5 - Tentar rodar app (vai dar problema de permissão de acesso a internet)
-    //TODO 6 - Incluir permissão de acesso a internet
-    //TODO 7 - Tentar rodar app (Request HTTP Main Thread)
-    //TODO 8 - Ir para slide e falar sobre Coroutines
-    //TODO 9 - Tentar rodar app e consumir api (agora com sucesso)
+    //TODO 1.0 - Incluir dependências
+    //TODO 2.0 - Explicar dependencias
+    //TODO 3.0 - Criar arquivo ApiService
+    //TODO 3.1 - Criar interface FeedbackAPI
+    //TODO 4.0 - Habilitar consumo de APIs HTTP no AndroidManifest
+    //TODO 5.0 - Tentar rodar app (vai dar problema de permissão de acesso a internet)
+    //TODO 6.0 - Incluir permissão de acesso a internet
+    //TODO 7.0 - Tentar rodar app (Request HTTP Main Thread)
+    //TODO 8.0 - Ir para slide e falar sobre Coroutines
+    //TODO 9.0 - Tentar rodar app e consumir api (agora com sucesso)
 }

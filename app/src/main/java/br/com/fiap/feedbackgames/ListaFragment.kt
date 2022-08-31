@@ -20,7 +20,6 @@ class ListaFragment : Fragment(){
 
     private lateinit var binding: FragmentListaBinding
     private lateinit var listaFeedbacks: MutableList<FeedbackGame>
-
     private lateinit var  recyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
